@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 int findMaxMinDistance(vector<int> nests, int numOfBirds, int numOfNests) {
@@ -31,6 +32,7 @@ int findMaxMinDistance(vector<int> nests, int numOfBirds, int numOfNests) {
 
 int main() {
     vector<int> nests = {1, 2, 4, 8, 9};
+    sort(nests.begin(), nests.end());
     int numOfNests = 5;
     int numOfBirds = 3;
 

@@ -7,9 +7,7 @@ int find_lower_bound(int elem, vector<int> a2) {
     int s = 0, e = a2.size() - 1, mid;
 
     while(s <= e) {
-        //cout << "start is " << a2[s] << " and end is " << a2[e] << endl;
         mid = (s + e) / 2;
-        //cout << "mid is " << a2[mid] << endl;
 
         if(a2[mid] >= elem) {
             e = (mid - 1);

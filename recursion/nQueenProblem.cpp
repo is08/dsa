@@ -37,6 +37,24 @@ bool possibleToPlace(int board[][5], int i, int j, int n) {
         tempJ++;
     }
 
+    tempI = i, tempJ = j;
+    while(tempI >= 0 && tempJ < n) {
+        if(board[tempI][tempJ] == 1) {
+            return false;
+        }
+        tempI--;
+        tempJ++;
+    }
+
+    tempI = i, tempJ = j;
+    while(tempI < n && tempJ >= 0) {
+        if(board[tempI][tempJ] == 1) {
+            return false;
+        }
+        tempI++;
+        tempJ--;
+    }
+
     return true;
 }
 

@@ -87,11 +87,11 @@ void mergeSort(vector<int> &arr, int s, int e){
 
     int mid = (s + e) / 2;
 
-    cout << "call for LEFT mergeSort from " << s << " to " << mid << endl;
+    cout << "call for LEFT mergeSort from " << arr[s] << " to " << arr[mid] << endl;
     mergeSort(arr, s, mid);
-    cout << "call for RIGHT mergeSort from " << (mid + 1) << " to " << e << endl;
+    cout << "call for RIGHT mergeSort from " << arr[mid + 1] << " to " << arr[e] << endl;
     mergeSort(arr, mid + 1, e);
-    cout << "call for merge from " << (mid + 1) << " to " << e << endl;
+    cout << "call for merge from " << arr[s] << " to " << arr[e] << endl;
     merge(arr, s, e);
 }
 

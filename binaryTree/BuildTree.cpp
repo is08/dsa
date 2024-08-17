@@ -118,6 +118,29 @@ void printLeveledTree(Node *root) {
     cout << endl;
 }
 
+int height(Node* root) {
+    if(root == NULL) {
+        return 0;
+    }
+
+    int h1 = height(root->left);
+    int h2 = height(root->right);
+
+    return 1 + max(h1, h2);
+}
+
+int diameter(Node* root) {
+    if(root == NULL) {
+        return 0;
+    }
+
+    int d1 = height(root->left) + height(root->right);
+    int d2 = diameter(root->left);
+    int d3 = diameter(root->right);
+
+    return max(d1, max(d2, d3));
+}
+
 
 int main() {
     Node *root = buildTree();
@@ -125,11 +148,13 @@ int main() {
     cout << endl;
     printLeveledTree(root);
     cout << endl;
+    cout << "diameter is " << diameter(root) << endl;
 
     Node *rootAgain = buildLevelOrderTree();
     printTree(rootAgain);
     cout << endl;
     printLeveledTree(rootAgain);
+    cout << "diameter is " << diameter(rootAgain) << endl;
 
     return 0;
 }

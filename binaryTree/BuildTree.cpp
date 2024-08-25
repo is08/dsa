@@ -141,6 +141,23 @@ int diameter(Node* root) {
     return max(d1, max(d2, d3));
 }
 
+int replaceWithSum(Node* root) {
+    if(root == NULL) {
+        return 0;
+    }
+    if(root->left == NULL && root->right == NULL) {
+        return root->val;
+    }
+
+    int LS = replaceWithSum(root->left);
+    int RS = replaceWithSum(root->right);
+
+    int temp = root->val;
+    root->val = LS + RS;
+
+    return temp + root->val;
+}
+
 
 int main() {
     Node *root = buildTree();
@@ -155,6 +172,10 @@ int main() {
     cout << endl;
     printLeveledTree(rootAgain);
     cout << "diameter is " << diameter(rootAgain) << endl;
+
+    replaceWithSum(root);
+    cout << "printing the updated tree where all the nodes have been replaced by their descendant sums:" << endl;
+    printLeveledTree(root);
 
     return 0;
 }

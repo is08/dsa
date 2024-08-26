@@ -1,5 +1,6 @@
 #include<iostream>
 #include<queue>
+#include<utility>
 using namespace std;
 
 class Node {
@@ -158,6 +159,23 @@ int replaceWithSum(Node* root) {
     return temp + root->val;
 }
 
+pair<bool, int> isHeightBalanced(Node* node) {
+    pair<bool, int> ans;
+    if(node == NULL) {
+        ans.first = true;
+        ans.second = 0;
+        return ans;
+    }
+
+    pair<bool, int> LT = isHeightBalanced(node->left);
+    pair<bool, int> RT = isHeightBalanced(node->right);
+
+    ans.first = (abs(LT.second - RT.second) <= 1) && LT.first && RT.first;
+    ans.second = 1 + max(LT.second, RT.second);
+
+    return ans;
+}
+
 
 int main() {
     Node *root = buildTree();
@@ -176,6 +194,9 @@ int main() {
     replaceWithSum(root);
     cout << "printing the updated tree where all the nodes have been replaced by their descendant sums:" << endl;
     printLeveledTree(root);
+
+    pair<bool, int> ans = isHeightBalanced(rootAgain);
+    cout << "the tree is height balanced: " << ans.first << " and height of the tree is " << ans.second << endl;
 
     return 0;
 }

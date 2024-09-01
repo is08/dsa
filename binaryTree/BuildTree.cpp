@@ -176,6 +176,19 @@ pair<bool, int> isHeightBalanced(Node* node) {
     return ans;
 }
 
+pair<int, int> maxSubsetSum(Node *node) {
+    if(node == NULL) {
+        return make_pair(0, 0);
+    }
+
+    pair<int, int> LT = maxSubsetSum(node->left);
+    pair<int, int> RT = maxSubsetSum(node->right);
+
+    int nodeIncluded = node->val + LT.second + RT.second;
+    int nodeExcluded = max(LT.first, LT.second) + max(RT.first, RT.second);
+
+    return make_pair(nodeIncluded, nodeExcluded);
+}
 
 int main() {
     Node *root = buildTree();
@@ -197,6 +210,9 @@ int main() {
 
     pair<bool, int> ans = isHeightBalanced(rootAgain);
     cout << "the tree is height balanced: " << ans.first << " and height of the tree is " << ans.second << endl;
+
+    pair<int, int> ans2 = maxSubsetSum(rootAgain);
+    cout << "the max sum of subset is : " << max(ans2.first, ans2.second) << endl;
 
     return 0;
 }

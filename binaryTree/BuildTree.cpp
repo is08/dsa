@@ -190,6 +190,33 @@ pair<int, int> maxSubsetSum(Node *node) {
     return make_pair(nodeIncluded, nodeExcluded);
 }
 
+vector<int> leftView(Node *root) {
+    vector<int> ans;
+    queue<Node*> q;
+    q.push(root);
+
+    while(!q.empty()) {
+        int l = q.size();
+
+        for(int i = 1; i <= l; i++) {
+            Node* curr = q.front();
+            q.pop();
+
+            if(i == 1) {
+                ans.push_back(curr->val);
+            }
+
+            if(curr->left != NULL) {
+                q.push(curr->left);
+            }
+            if(curr->right != NULL) {
+                q.push(curr->right);
+            }
+        }
+    }
+    return ans;
+}
+
 int main() {
     Node *root = buildTree();
     printTree(root);
@@ -213,6 +240,12 @@ int main() {
 
     pair<int, int> ans2 = maxSubsetSum(rootAgain);
     cout << "the max sum of subset is : " << max(ans2.first, ans2.second) << endl;
+
+    vector<int> left = leftView(rootAgain);
+    for(int i = 0; i < left.size(); i++) {
+        cout << left[i] << " ";
+    }
+    cout << endl;
 
     return 0;
 }
